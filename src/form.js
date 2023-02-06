@@ -14,7 +14,7 @@ function NftMinter() {
   const [metadata, setMetadata] = useState("");
   const [buttonText, setButtonText] = useState("Upload to IPFS");
   const [uploadedToIPFS, setUploadedToIPFS] = useState(false);
-  const handleSubmit = async (event) => {
+  const uploadtoIPFS = async (event) => {
     event.preventDefault();
     setButtonText("Uploading to IPFS....");
     const client = new NFTStorage({ token: process.env.REACT_APP_NFT_KEY });
@@ -97,7 +97,7 @@ function NftMinter() {
         {!uploadedToIPFS ? (
           <button
             className="px-4 py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600"
-            onClick={handleSubmit}
+            onClick={uploadtoIPFS}
           >
             {buttonText}
           </button>
