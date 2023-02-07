@@ -1,12 +1,13 @@
 import { NFTStorage } from "nft.storage";
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { ConnectKitButton } from "connectkit";
 import {
   usePrepareContractWrite,
   useContractWrite,
   useWaitForTransaction,
 } from "wagmi";
-import abi from "./meta.json";
+import meta from "./meta.json";
+
 function NftMinter() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -14,6 +15,7 @@ function NftMinter() {
   const [metadata, setMetadata] = useState("");
   const [buttonText, setButtonText] = useState("Upload to IPFS");
   const [uploadedToIPFS, setUploadedToIPFS] = useState(false);
+
   const uploadtoIPFS = async (event) => {
     event.preventDefault();
     setButtonText("Uploading to IPFS....");
@@ -27,13 +29,13 @@ function NftMinter() {
     setUploadedToIPFS(true);
     setButtonText("Successful");
   };
+
   const { config } = usePrepareContractWrite({
-    address: "0x04796d59962A595e9dc24be912E6Ec8263247be8",
-    abi: abi.abi,
+    address: meta.address,
+    abi: meta.abi,
     functionName: "mintToken",
     args: [metadata],
   });
-
   const { data, writeAsync } = useContractWrite(config);
 
   const { isLoading, isSuccess } = useWaitForTransaction({

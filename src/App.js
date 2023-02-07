@@ -22,7 +22,7 @@ export const Shardeum = {
     },
   },
 };
-const chains = [polygonMumbai];
+const chains = [Shardeum];
 const client = createClient(
   getDefaultClient({
     appName: "NFTMinter",
